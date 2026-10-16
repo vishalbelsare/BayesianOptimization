@@ -1,0 +1,23 @@
+# This workflow will upload a Python Package using uv when a release is created
+# Note that you must manually update the version number in pyproject.toml before attempting this.
+
+name: Upload Python Package
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: astral-sh/setup-uv@v6
+    - run: uv build
+    - name: Publish to pypi
+      env:
+        PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+      run: uv publish --token "$PYPI_API_TOKEN"

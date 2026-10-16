@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.svm import SVC
 
 from bayes_opt import BayesianOptimization
-from bayes_opt.util import Colours
+from colorama import Fore
 
 def get_data():
     """Synthetic binary classification dataset."""
@@ -42,7 +42,7 @@ def rfc_cv(n_estimators, min_samples_split, max_features, data, targets):
     of cross validation is returned.
 
     Our goal is to find combinations of n_estimators, min_samples_split, and
-    max_features that minimzes the log loss.
+    max_features that minimizes the log loss.
     """
     estimator = RFC(
         n_estimators=n_estimators,
@@ -114,8 +114,8 @@ def optimize_rfc(data, targets):
 if __name__ == "__main__":
     data, targets = get_data()
 
-    print(Colours.yellow("--- Optimizing SVM ---"))
+    print(Fore.YELLOW + "--- Optimizing SVM ---")
     optimize_svc(data, targets)
 
-    print(Colours.green("--- Optimizing Random Forest ---"))
+    print(Fore.GREEN("--- Optimizing Random Forest ---"))
     optimize_rfc(data, targets)

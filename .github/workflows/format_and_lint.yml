@@ -1,0 +1,23 @@
+name: Code format and lint
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        python-version: "3.11"
+    - name: Install dependencies
+      run: uv sync --extra dev
+    - name: Run pre-commit
+      run: uv run pre-commit run --all-files --show-diff-on-failure --color=always

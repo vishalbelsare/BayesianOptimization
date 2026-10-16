@@ -28,3 +28,17 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+*temp*
+
+docs/*
+docsrc/.ipynb_checkpoints/*
+docsrc/*.ipynb
+docsrc/static/*
+docsrc/README.md
+
+poetry.lock
+uv.lock
+
+# Add log files and optimizer state files to gitignore
+examples/logs.log
+examples/optimizer_state.json
